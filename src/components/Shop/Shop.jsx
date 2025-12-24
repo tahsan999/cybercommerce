@@ -13,6 +13,7 @@ import airpods from "../../assets/images/airpods2.png";
 import ReactPaginate from "react-paginate";
 import { VscChevronLeft } from "react-icons/vsc";
 import { VscChevronRight } from "react-icons/vsc";
+import { Link } from 'react-router';
 
 const Shop = () => {
     const [priceOpen, setpriceOpen] = useState(false);
@@ -305,7 +306,7 @@ const searchedBrand = brands.filter((item) => item.toLowerCase().includes(brandI
                     <img className="mx-auto" src={product.image} alt="" />
                     <div className="pt-4 text-center pb-7">
                       <h4 className="pb-4 font-popins font-medium text-[14px] leading-6 text-black">
-                        {product.name}
+                       <Link to="/product/details">{product.name}</Link>
                       </h4>
                       <h3 className="pb-9 font-popins font-semibold text-[24px] leading-6 text-black">
                         ${product.price}
