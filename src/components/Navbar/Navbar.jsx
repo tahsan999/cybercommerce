@@ -43,7 +43,7 @@ const Navbar = () => {
             <div className="[&>div]:text-black [&>div]:text-[20px]">
               <div className="flex gap-6">
                 <IoHeartOutline />
-                <IoCartOutline />
+                <Link to="/cart"><IoCartOutline /></Link>
                 <FiUser />
               </div>
             </div>
