@@ -44,7 +44,9 @@ const Navbar = () => {
               <div className="flex gap-6">
                 <IoHeartOutline />
                 <Link to="/cart"><IoCartOutline /></Link>
-                <FiUser />
+                <Link to="/register">
+                  <FiUser />
+                </Link>
               </div>
             </div>
           </div>
