@@ -6,6 +6,7 @@ import cart1 from '../../assets/images/cart.png'
 import cart2 from '../../assets/images/cart2.png'
 import cart3 from '../../assets/images/cart3.png'
 import Container from '../../components/Utilities/Container.jsx'
+import { Link } from 'react-router'
 
 const Cart = () => {
     const [carts, setCarts] = useState([
@@ -186,9 +187,11 @@ const Cart = () => {
                   </span>
                 </div>
               </div>
-              <button className="font-popins font-medium text-[16px] leading-6 text-white bg-black rounded -md w-full py-4">
+              <Link to="/address">
+                <button className="font-popins font-medium text-[16px] leading-6 text-white bg-black rounded -md w-full py-4">
                 Checkout
               </button>
+              </Link>
             </form>
           </div>
         </div>

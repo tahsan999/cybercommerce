@@ -2,47 +2,19 @@ import { BiCamera, BiHeadphone, BiPhone } from "react-icons/bi";
 import { BsController, BsSmartwatch } from "react-icons/bs";
 import { FaComputer } from "react-icons/fa6";
 import Container from "../Utilities/Container";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router";
 
-const categories = [
-  {
-    id: 1,
-    name: "Phones",
-    url: "/phones",
-    icon: <BiPhone size={20} />,
-  },
-  {
-    id: 2,
-    name: "Computers",
-    url: "/computers",
-    icon: <FaComputer size={20} />,
-  },
-  {
-    id: 3,
-    name: "Smart Watches",
-    url: "/smart-watches",
-    icon: <BsSmartwatch size={20} />,
-  },
-  {
-    id: 4,
-    name: "Cameras",
-    url: "/cameras",
-    icon: <BiCamera size={20} />,
-  },
-  {
-    id: 5,
-    name: "Headphones",
-    url: "/headphones",
-    icon: <BiHeadphone size={20} />,
-  },
-  {
-    id: 6,
-    name: "Gaming",
-    url: "/gaming",
-    icon: <BsController size={20} />,
-  },
-];
 
 const CategoryContainer = () => {
+
+  const [categories, setCategories] = useState([])
+  useEffect(() => {
+    axios.get('https://dummyjson.com/products/categories')
+    .then(res => setCategories(res.data))
+  },[])
+
   return (
     <section className="bg-[#2E2E2E] py-3">
       <Container>
@@ -52,9 +24,9 @@ const CategoryContainer = () => {
             gap-y-3 gap-x-5 text-white/70
           "
         >
-          {categories.map((category, idx) => (
+          {categories.slice(0,6).map((category, index) => (
             <li
-              key={category.id}
+              key={index}
               className="
                 flex items-center gap-2 px-4 py-1 
                 border-r border-white/30 
@@ -64,8 +36,8 @@ const CategoryContainer = () => {
                 text-sm md:text-base
               "
             >
-              {category.icon}
-              <a href={category.url}>{category.name}</a>
+              <BsSmartwatch></BsSmartwatch>
+              <Link to={`/products/category/${category.slug}`}>{category.name}</Link>
             </li>
           ))}
         </ul>

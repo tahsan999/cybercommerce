@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from '../../components/Utilities/Container.jsx'
 import { IoChevronForwardSharp } from "react-icons/io5";
 import PriceRange from '../Utilities/PriceRange.jsx';
@@ -14,6 +14,7 @@ import ReactPaginate from "react-paginate";
 import { VscChevronLeft } from "react-icons/vsc";
 import { VscChevronRight } from "react-icons/vsc";
 import { Link } from 'react-router';
+import axios from 'axios';
 
 const Shop = () => {
     const [priceOpen, setpriceOpen] = useState(false);
@@ -41,47 +42,15 @@ const sortlist = ['By Rating', 'By Price']
 
 
 const searchedBrand = brands.filter((item) => item.toLowerCase().includes(brandInput.toLowerCase()));
-  const products = [
-    {
-      id: 1,
-      name: "Apple iPhone 14 Pro Max 128GB Deep Purple (MQ9T3RX/A)",
-      price: 900,
-      image: iphone,
-    },
-    {
-      id: 2,
-      name: "Blackmagic Pocket Cinema Camera 6k",
-      price: 2535,
-      image: camera,
-    },
-    {
-      id: 3,
-      name: "Apple Watch Series 9 GPS 41mm Starlight Aluminium Case",
-      price: 399,
-      image: smartwatch,
-    },
-    { id: 4, name: "AirPods Max Silver", price: 539, image: airpods },
-    {
-      id: 5,
-      name: "Blackmagic Pocket Cinema Camera 6k",
-      price: 2535,
-      image: camera,
-    },
-    { id: 6, name: "AirPods Max Silver", price: 539, image: airpods },
-    {
-      id: 7,
-      name: "Apple iPhone 14 Pro Max 128GB Deep Purple (MQ9T3RX/A)",
-      price: 900,
-      image: iphone,
-    },
-    { id: 8, name: "AirPods Max Silver", price: 539, image: airpods },
-    {
-      id: 9,
-      name: "Blackmagic Pocket Cinema Camera 6k",
-      price: 3000,
-      image: camera,
-    },
-  ];
+  
+
+  const [products, setProducts] = useState([])
+  const [sortBy, setSortBy] =  useState('rating')
+
+  useEffect(() => {
+    axios.get(`https://dummyjson.com/products?sortBy=${sortBy}`)
+    .then(res => setProducts(res.data.products))
+  })
 
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -90,10 +59,14 @@ const searchedBrand = brands.filter((item) => item.toLowerCase().includes(brandI
 
   const offset = currentPage * itemsPerPage;
   const currentItems = products.slice(offset, offset + itemsPerPage);
-
+  const startItem = offset + 1;
+  const endItem = offset + currentItems.length;
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
   };
+
+
+
 
   return (
     <>
@@ -263,7 +236,7 @@ const searchedBrand = brands.filter((item) => item.toLowerCase().includes(brandI
                 <div>
                   <p className="font-popins font-medium text-[#6C6C6C] text-[16px] leading-4">
                     Selected Products:{" "}
-                    <span className="text-[20px] text-black">85</span>
+                    <span className="text-[20px] text-black">{startItem}–{endItem} of {products.length}</span>
                   </p>
                 </div>
                 <div className="w-[256px] relative">
@@ -283,6 +256,7 @@ const searchedBrand = brands.filter((item) => item.toLowerCase().includes(brandI
                           onClick={() => {
                             setSort(item);
                             setOpen(false);
+                            sortBy=='rating'? setSortBy('price') :setSortBy('rating')
                           }}
                           className={`${
                             index !== sortlist.length - 1
@@ -303,10 +277,10 @@ const searchedBrand = brands.filter((item) => item.toLowerCase().includes(brandI
                     <div className="py-2">
                       <GoHeart className="ms-auto" />
                     </div>
-                    <img className="mx-auto" src={product.image} alt="" />
+                    <img className="mx-auto" src={product.thumbnail} alt="" />
                     <div className="pt-4 text-center pb-7">
                       <h4 className="pb-4 font-popins font-medium text-[14px] leading-6 text-black">
-                       <Link to="/product/details">{product.name}</Link>
+                       <Link to="/product/details">{product.title}</Link>
                       </h4>
                       <h3 className="pb-9 font-popins font-semibold text-[24px] leading-6 text-black">
                         ${product.price}

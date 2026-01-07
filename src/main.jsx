@@ -10,6 +10,9 @@ import Details from "./components/Details/Details.jsx";
 import Cart from "./components/Cart/Cart.jsx";
 import Register from "./components/Register/Register.jsx";
 import Login from "./components/Login/Login.jsx";
+import Address from "./components/Address/Address.jsx";
+import Shipping from "./components/Shipping/Shipping.jsx";
+import ProductCategory from "./components/Productcategory/Productcategory.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,9 @@ const router = createBrowserRouter([
       { path: 'cart', Component: Cart },
       { path: 'register', Component: Register },
       { path: 'login', Component: Login },
+      { path: 'address', Component:Address },
+      { path: 'shipping', Component:Shipping },
+      { path: 'products/category/:slug', Component:ProductCategory },
     ],
   },
 ]);
