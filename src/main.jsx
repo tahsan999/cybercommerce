@@ -13,6 +13,9 @@ import Login from "./components/Login/Login.jsx";
 import Address from "./components/Address/Address.jsx";
 import Shipping from "./components/Shipping/Shipping.jsx";
 import ProductCategory from "./components/Productcategory/Productcategory.jsx";
+import Error from "./components/Error/404.jsx";
+import Payment from "./components/Payment/Payment.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -21,13 +24,15 @@ const router = createBrowserRouter([
     children: [
       { index: true, Component: App },
       { path: 'shop', Component: Shop },
-      { path: 'product/details', Component: Details },
+      { path: 'product/details/:id', Component: Details },
       { path: 'cart', Component: Cart },
       { path: 'register', Component: Register },
       { path: 'login', Component: Login },
       { path: 'address', Component:Address },
       { path: 'shipping', Component:Shipping },
       { path: 'products/category/:slug', Component:ProductCategory },
+      { path: '*', Component:Error },
+      { path: 'payment', Component:Payment },
     ],
   },
 ]);

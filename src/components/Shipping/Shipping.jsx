@@ -14,9 +14,9 @@ const Shipping = () => {
 
   return (
     <Container>
-         <div className="flex items-center justify-center p-6">
-      <div className="w-full">
-        <div className="flex items-center justify-between h-10 mb-[72px]">
+      <div className="flex items-center justify-center p-6">
+        <div className="w-full">
+          <div className="flex items-center justify-between h-10 mb-[72px]">
             <div>
               <img src={Step1} alt="" />
             </div>
@@ -25,63 +25,80 @@ const Shipping = () => {
             </div>
             <div>
               <img src={Step3} alt="" />
-        
-            </div>
-        </div>
-
-        <h2 className="text-lg font-popins font-semibold mb-6">Shipment Method</h2>
-        <div onClick={() => setMethod("free")} className={optionStyle("free")}>
-          <div className=" flex items-center gap-3">
-            <input className="custom-radio" type="radio" checked={method === "free"} readOnly />
-            <div className="flex gap-4">
-              <p className="font-popins font-medium">Free</p>
-              <p className=" font-popins text-4 leading-6 font-regular ">Regular shipment</p>
             </div>
           </div>
-          <span className="text-sm">17 Oct, 2023</span>
-        </div>
 
-        {/* Express */}
-        <div
-          onClick={() => setMethod("express")}
-          className={optionStyle("express")}
-        >
-          <div className="flex items-center gap-3">
-            <input type="radio" checked={method === "express"} readOnly />
-            <div className="flex gap-4">
-              <p className="font-popins font-medium">$8.50</p>
-              <p className="font-popins text-4 leading-6 font-regular">Get your delivery as soon as possible</p>
+          <h2 className="text-lg font-popins font-semibold mb-6">
+            Shipment Method
+          </h2>
+          <div
+            onClick={() => setMethod("free")}
+            className={optionStyle("free")}
+          >
+            <div className=" flex items-center gap-3">
+              <input
+                className="custom-radio"
+                type="radio"
+                checked={method === "free"}
+                readOnly
+              />
+              <div className="flex gap-4">
+                <p className="font-popins font-medium">Free</p>
+                <p className=" font-popins text-4 leading-6 font-regular ">
+                  Regular shipment
+                </p>
+              </div>
             </div>
+            <span className="text-sm">17 Oct, 2023</span>
           </div>
-          <span className="text-sm">1 Oct, 2023</span>
-        </div>
 
-        {/* Schedule */}
-        <div
-          onClick={() => setMethod("schedule")}
-          className={optionStyle("schedule")}
-        >
-          <div className="flex items-center gap-3">
-            <input type="radio" checked={method === "schedule"} readOnly />
-            <div className="flex gap-4">
-              <p className="font-popins font-medium">Schedule</p>
-              <p className="font-popins text-4 leading-6 font-regular">Pick a date when you want delivery</p>
+          {/* Express */}
+          <div
+            onClick={() => setMethod("express")}
+            className={optionStyle("express")}
+          >
+            <div className="flex items-center gap-3">
+              <input type="radio" checked={method === "express"} readOnly />
+              <div className="flex gap-4">
+                <p className="font-popins font-medium">$8.50</p>
+                <p className="font-popins text-4 leading-6 font-regular">
+                  Get your delivery as soon as possible
+                </p>
+              </div>
             </div>
+            <span className="text-sm">1 Oct, 2023</span>
           </div>
-          <span className="text-sm">Select Date</span>
-        </div>
 
-        {/* Buttons */}
-        <div className="flex justify-end gap-4 mt-6">
-          <button className="px-6 py-2 border rounded-md">Back</button>
-          <button className="px-6 py-2 bg-black text-white rounded-md">
-            Next
-          </button>
+          {/* Schedule */}
+          <div
+            onClick={() => setMethod("schedule")}
+            className={optionStyle("schedule")}
+          >
+            <div className="flex items-center gap-3">
+              <input type="radio" checked={method === "schedule"} readOnly />
+              <div className="flex gap-4">
+                <p className="font-popins font-medium">Schedule</p>
+                <p className="font-popins text-4 leading-6 font-regular">
+                  Pick a date when you want delivery
+                </p>
+              </div>
+            </div>
+            <span className="text-sm">Select Date</span>
+          </div>
+
+          {/* Buttons */}
+          <div className="flex justify-end gap-4 mt-6">
+            <Link to="/shipping" className="px-6 py-2 border rounded-md">Back</Link>
+            <Link
+              to="/payment"
+              className="px-6 py-2 bg-black text-white rounded-md"
+            >
+              Next
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
     </Container>
-   
   );
 };
 

@@ -236,7 +236,9 @@ const searchedBrand = brands.filter((item) => item.toLowerCase().includes(brandI
                 <div>
                   <p className="font-popins font-medium text-[#6C6C6C] text-[16px] leading-4">
                     Selected Products:{" "}
-                    <span className="text-[20px] text-black">{startItem}–{endItem} of {products.length}</span>
+                    <span className="text-[20px] text-black">
+                      {startItem}–{endItem} of {products.length}
+                    </span>
                   </p>
                 </div>
                 <div className="w-[256px] relative">
@@ -256,7 +258,9 @@ const searchedBrand = brands.filter((item) => item.toLowerCase().includes(brandI
                           onClick={() => {
                             setSort(item);
                             setOpen(false);
-                            sortBy=='rating'? setSortBy('price') :setSortBy('rating')
+                            sortBy == "rating"
+                              ? setSortBy("price")
+                              : setSortBy("rating");
                           }}
                           className={`${
                             index !== sortlist.length - 1
@@ -280,17 +284,19 @@ const searchedBrand = brands.filter((item) => item.toLowerCase().includes(brandI
                     <img className="mx-auto" src={product.thumbnail} alt="" />
                     <div className="pt-4 text-center pb-7">
                       <h4 className="pb-4 font-popins font-medium text-[14px] leading-6 text-black">
-                       <Link to="/product/details">{product.title}</Link>
+                        <Link to={`/product/details/${product.id}`}>
+                          {product.title}
+                        </Link>
                       </h4>
                       <h3 className="pb-9 font-popins font-semibold text-[24px] leading-6 text-black">
                         ${product.price}
                       </h3>
-                      <a
-                        href=""
+                      <Link
+                        to={`/product/details/${product.id}`}
                         className="font-popins font-medium text-[14px] leading-6 text-white bg-black py-3 px-16 rounded-md"
                       >
                         Buy Now
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 ))}
