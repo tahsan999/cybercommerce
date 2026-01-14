@@ -14,8 +14,10 @@ import Address from "./components/Address/Address.jsx";
 import Shipping from "./components/Shipping/Shipping.jsx";
 import ProductCategory from "./components/Productcategory/Productcategory.jsx";
 import Error from "./components/Error/404.jsx";
-import Payment from "./components/Payment/Payment.jsx";
-
+import firebaseConfig from "./firebaseConfig.js";
+import Profile from "./components/Profile/Profile.jsx";
+import { store } from './redux/store.js'
+import { Provider } from 'react-redux'
 
 const router = createBrowserRouter([
   {
@@ -23,20 +25,23 @@ const router = createBrowserRouter([
     Component: MainRoot,
     children: [
       { index: true, Component: App },
-      { path: 'shop', Component: Shop },
-      { path: 'product/details/:id', Component: Details },
-      { path: 'cart', Component: Cart },
-      { path: 'register', Component: Register },
-      { path: 'login', Component: Login },
-      { path: 'address', Component:Address },
-      { path: 'shipping', Component:Shipping },
-      { path: 'products/category/:slug', Component:ProductCategory },
-      { path: '*', Component:Error },
-      { path: 'payment', Component:Payment },
+      { path: "shop", Component: Shop },
+      { path: "product/details/:id", Component: Details },
+      { path: "cart", Component: Cart },
+      { path: "register", Component: Register },
+      { path: "login", Component: Login },
+      { path: "address", Component: Address },
+      { path: "shipping", Component: Shipping },
+      { path: "products/category/:slug", Component: ProductCategory },
+      { path: "*", Component: Error },
+      { path: "profile", Component: Profile },
+      // { path: 'payment', Component:Payment },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );

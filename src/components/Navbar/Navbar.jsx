@@ -4,8 +4,26 @@ import { IoCartOutline, IoHeartOutline } from "react-icons/io5";
 import logo from "../../assets/images/logo.png";
 import Container from "../Utilities/Container";
 import { Link } from "react-router";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {authinfo} from '../../redux/authSlice'
 
 const Navbar = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const auth = getAuth();
+      const unsub = onAuthStateChanged(auth, (user) => {
+        if (user) {
+          dispatch(authinfo({
+             uid: user.uid,
+             email: user.email,
+             displayName: user.displayName,
+          }))
+        }
+      })
+      return () => unsub()
+  },[])
   return (
     <>
       <nav className="py-4">
@@ -38,13 +56,16 @@ const Navbar = () => {
                 <li>
                   <a href="">Contact</a>
                 </li>
+                <li>
+                  <Link to="/register">Sign Up</Link>
+                </li>
               </ul>
             </div>
             <div className="[&>div]:text-black [&>div]:text-[20px]">
               <div className="flex gap-6">
                 <IoHeartOutline />
                 <Link to="/cart"><IoCartOutline /></Link>
-                <Link to="/register">
+                <Link to="/profile">
                   <FiUser />
                 </Link>
               </div>
